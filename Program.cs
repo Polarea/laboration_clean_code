@@ -7,20 +7,17 @@ class MainClass
 
 	public static void Main(string[] args)
 	{
-
 		bool playOn = true;
-		Console.WriteLine("Enter your user name:\n");
-		string name = Console.ReadLine();
+		string name = Game.GetUserName();
 
 		while (playOn)
 		{
-			string goal = makeGoal();
+			string goal = Game.MakeGoal();
 
-
-			Console.WriteLine("New game:\n");
+			Game.DisplayNewGameMessage();
 			//comment out or remove next line to play real games!
-			Console.WriteLine("For practice, number is: " + goal + "\n");
-			string guess = Console.ReadLine();
+			Game.DisplayNewGame(goal);
+			string guess = Game.GetUserGuess();
 
 			int nGuess = 1;
 			string bbcc = checkBC(goal, guess);
@@ -45,23 +42,7 @@ class MainClass
 			}
 		}
 	}
-	static string makeGoal()
-	{
-		Random randomGenerator = new Random();
-		string goal = "";
-		for (int i = 0; i < 4; i++)
-		{
-			int random = randomGenerator.Next(10);
-			string randomDigit = "" + random;
-			while (goal.Contains(randomDigit))
-			{
-				random = randomGenerator.Next(10);
-				randomDigit = "" + random;
-			}
-			goal = goal + randomDigit;
-		}
-		return goal;
-	}
+
 
 	static string checkBC(string goal, string guess)
 	{
