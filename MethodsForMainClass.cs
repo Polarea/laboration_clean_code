@@ -69,4 +69,16 @@ public static class Game
         return $"{"BBBB"[..bulls]},{"CCCC"[..cows]}";
     }
 
+    public static void PlayGameUntillRightGuess(string goal, int numberOfGuesses)
+    {
+
+        string resultOfUserGuess = "";
+        while (resultOfUserGuess != "BBBB,")
+        {
+            numberOfGuesses++;
+            string userGuess = GetUserGuess();
+            resultOfUserGuess = CheckUserGuess(goal, userGuess);
+            Console.WriteLine(resultOfUserGuess + "\n");
+        }
+    }
 }

@@ -13,28 +13,17 @@ class MainClass
 		while (playOn)
 		{
 			string goal = Game.MakeGoal();
-
+			int numberOfGuesses = 0;
 			Game.DisplayNewGameMessage();
-			//comment out or remove next line to play real games!
 			Game.DisplayNewGame(goal);
-			string guess = Game.GetUserGuess();
-
-			int nGuess = 1;
-			string bbcc = Game.CheckUserGuess(goal, guess);
-			Console.WriteLine(bbcc + "\n");
-			while (bbcc != "BBBB,")
-			{
-				nGuess++;
-				guess = Console.ReadLine();
-				Console.WriteLine(guess + "\n");
-				bbcc = Game.CheckUserGuess(goal, guess);
-				Console.WriteLine(bbcc + "\n");
-			}
+			Game.PlayGameUntillRightGuess(goal, numberOfGuesses);
 			StreamWriter output = new StreamWriter("result.txt", append: true);
-			output.WriteLine(name + "#&#" + nGuess);
+			output.WriteLine(name + "#&#" + numberOfGuesses
+			);
 			output.Close();
 			showTopList();
-			Console.WriteLine("Correct, it took " + nGuess + " guesses\nContinue?");
+			Console.WriteLine("Correct, it took " + numberOfGuesses
+			 + " guesses\nContinue?");
 			string answer = Console.ReadLine();
 			if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
 			{
