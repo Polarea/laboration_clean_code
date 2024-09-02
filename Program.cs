@@ -20,14 +20,14 @@ class MainClass
 			string guess = Game.GetUserGuess();
 
 			int nGuess = 1;
-			string bbcc = checkBC(goal, guess);
+			string bbcc = Game.CheckUserGuess(goal, guess);
 			Console.WriteLine(bbcc + "\n");
 			while (bbcc != "BBBB,")
 			{
 				nGuess++;
 				guess = Console.ReadLine();
 				Console.WriteLine(guess + "\n");
-				bbcc = checkBC(goal, guess);
+				bbcc = Game.CheckUserGuess(goal, guess);
 				Console.WriteLine(bbcc + "\n");
 			}
 			StreamWriter output = new StreamWriter("result.txt", append: true);
@@ -42,32 +42,6 @@ class MainClass
 			}
 		}
 	}
-
-
-	static string checkBC(string goal, string guess)
-	{
-		int cows = 0, bulls = 0;
-		guess += "    ";     // if player entered less than 4 chars
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				if (goal[i] == guess[j])
-				{
-					if (i == j)
-					{
-						bulls++;
-					}
-					else
-					{
-						cows++;
-					}
-				}
-			}
-		}
-		return "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
-	}
-
 
 	static void showTopList()
 	{
