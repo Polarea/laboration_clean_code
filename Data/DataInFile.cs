@@ -9,7 +9,7 @@ public class DataInFile : IDataHandler
         _data = data;
     }
 
-    public List<IData> GetData()
+    public List<IData> GetScore()
     {
         StreamReader savedResults = new("result.txt");
         string? resultLine;
@@ -33,8 +33,10 @@ public class DataInFile : IDataHandler
         return _listData;
     }
 
-    public void SaveData()
+    public void SaveScore(string name, int score)
     {
-        throw new NotImplementedException();
+        StreamWriter output = new("result.txt", append: true);
+        output.WriteLine($"{name}#&#{score}");
+        output.Close();
     }
 }

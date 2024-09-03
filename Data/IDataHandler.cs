@@ -1,5 +1,5 @@
 public interface IDataHandler
 {
-    void SaveData();
-    List<IData> GetData();
+    void SaveScore(string name, int score);
+    List<IData> GetScore();
 }
