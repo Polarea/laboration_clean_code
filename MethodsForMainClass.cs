@@ -1,16 +1,26 @@
+using System.IO.Compression;
+using System.Net;
+
 public static class Game
 {
+    public static bool IsOn = true;
+    static string name = string.Empty;
+    static string goal = string.Empty;
+    static string userGuess = string.Empty;
+    static int numberOfGuesses;
+    static string resultOfUserGuess = string.Empty;
+    static readonly List<PlayerData> gameResultsList = [];
+
     static string ReadConsole(string exceptionMessage)
     {
         string input = Console.ReadLine()
         ?? throw new NullReferenceException(exceptionMessage);
         return input;
     }
-    public static string GetUserName()
+    public static void GetUserName()
     {
         Console.WriteLine("Enter your user name:\n");
-        string name = ReadConsole("Invalid input.");
-        return name;
+        name = ReadConsole("Invalid input.");
     }
 
     public static void DisplayNewGameMessage()
@@ -18,14 +28,14 @@ public static class Game
         Console.WriteLine("New game:\n");
     }
 
-    public static void DisplayNewGame(string goal)
+    public static void DisplayNewGame()
     {
         Console.WriteLine($"For practice, number is: {goal}\n");
     }
 
-    public static string MakeGoal()
+    public static void MakeGoal()
     {
-        Random randomDigit = new Random();
+        Random randomDigit = new();
         int uniqueDigit = randomDigit.Next(10);
         string fourUniqueDigits = $"{uniqueDigit}";
         for (int i = 0; i < 3; i++)
@@ -36,16 +46,15 @@ public static class Game
             }
             fourUniqueDigits += $"{uniqueDigit}";
         }
-        return fourUniqueDigits;
+        goal = fourUniqueDigits;
     }
 
-    public static string GetUserGuess()
+    static void GetUserGuess()
     {
-        string userGuess = ReadConsole("Invalid input.");
-        return userGuess;
+        userGuess = ReadConsole("Invalid input.");
     }
 
-    public static string CheckUserGuess(string goal, string userGuess)
+    static void CheckUserGuess()
     {
         int cows = 0, bulls = 0;
         userGuess = userGuess.PadRight(4);
@@ -66,19 +75,76 @@ public static class Game
                 }
             }
         }
-        return $"{"BBBB"[..bulls]},{"CCCC"[..cows]}";
+        resultOfUserGuess = $"{"BBBB"[..bulls]},{"CCCC"[..cows]}";
     }
-
-    public static void PlayGameUntillRightGuess(string goal, int numberOfGuesses)
+    public static void PlayGameUntillRightGuess()
     {
-
-        string resultOfUserGuess = "";
+        numberOfGuesses = 1;
+        resultOfUserGuess = string.Empty;
         while (resultOfUserGuess != "BBBB,")
         {
             numberOfGuesses++;
-            string userGuess = GetUserGuess();
-            resultOfUserGuess = CheckUserGuess(goal, userGuess);
+            GetUserGuess();
+            CheckUserGuess();
             Console.WriteLine(resultOfUserGuess + "\n");
+        }
+    }
+
+    public static void SaveGameResult()
+    {
+        StreamWriter output = new("result.txt", append: true);
+        output.WriteLine($"{name}#&#{numberOfGuesses}");
+        output.Close();
+    }
+
+    public static void DisplayGameResult()
+    {
+        ShowTopList();
+        Console.WriteLine($"Correct, it took {numberOfGuesses} guesses\nContinue?");
+    }
+
+    public static void AskToContinue()
+    {
+        string answer = ReadConsole("Input is invalid!");
+        if (answer != null && answer != "" && answer[..1] == "n")
+        {
+            IsOn = false;
+        }
+    }
+
+    static List<PlayerData> GetGameResults()
+    {
+        StreamReader savedResults = new("result.txt");
+        string? resultLine;
+        while ((resultLine = savedResults.ReadLine()) != null)
+        {
+            string[] separator = ["#&#"];
+            string[] nameAndGuesses = resultLine.Split(separator, StringSplitOptions.None);
+            string name = nameAndGuesses[0];
+            int guesses = Convert.ToInt32(nameAndGuesses[1]);
+            PlayerData playerData = new(name, guesses);
+            int playerPositionInResultList = gameResultsList.IndexOf(playerData);
+            if (playerPositionInResultList < 0)
+            {
+                gameResultsList.Add(playerData);
+            }
+            else
+            {
+                gameResultsList[playerPositionInResultList].Update(guesses);
+            }
+        }
+        savedResults.Close();
+        gameResultsList.Sort((playerOnPosition1, playerOnPosition2) => playerOnPosition1.Average().CompareTo(playerOnPosition2.Average()));
+        return gameResultsList;
+    }
+
+    static void ShowTopList()
+    {
+        GetGameResults();
+        Console.WriteLine("Player games average");
+        foreach (PlayerData player in gameResultsList)
+        {
+            Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", player.Name, player.NGames, player.Average()));
         }
     }
 }
