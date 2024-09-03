@@ -1,8 +1,13 @@
 using System.IO.Compression;
 using System.Net;
 
-public static class Game
+public class Game
 {
+    IDataHandler _dataHandler;
+    public Game(IDataHandler dataHandler)
+    {
+        _dataHandler = dataHandler;
+    }
     public static bool IsOn = true;
     static string name = string.Empty;
     static string goal = string.Empty;
@@ -79,7 +84,7 @@ public static class Game
     }
     public static void PlayGameUntillRightGuess()
     {
-        numberOfGuesses = 1;
+        numberOfGuesses = 0;
         resultOfUserGuess = string.Empty;
         while (resultOfUserGuess != "BBBB,")
         {
@@ -115,26 +120,6 @@ public static class Game
 
     static void GetGameResults()
     {
-        StreamReader savedResults = new("result.txt");
-        string? resultLine;
-        while ((resultLine = savedResults.ReadLine()) != null)
-        {
-            string[] separator = ["#&#"];
-            string[] nameAndGuesses = resultLine.Split(separator, StringSplitOptions.None);
-            string name = nameAndGuesses[0];
-            int guesses = Convert.ToInt32(nameAndGuesses[1]);
-            PlayerData playerData = new(name, guesses);
-            int playerPositionInResultList = gameResultsList.IndexOf(playerData);
-            if (playerPositionInResultList < 0)
-            {
-                gameResultsList.Add(playerData);
-            }
-            else
-            {
-                gameResultsList[playerPositionInResultList].Update(guesses);
-            }
-        }
-        savedResults.Close();
         gameResultsList.Sort((playerOnPosition1, playerOnPosition2) =>
         playerOnPosition1.Average().CompareTo(playerOnPosition2.Average()));
     }
@@ -145,7 +130,7 @@ public static class Game
         Console.WriteLine(string.Format("{0,-9}{1,8}{2,9}", "Player", "games", "average"));
         foreach (PlayerData player in gameResultsList)
         {
-            Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", player.Name, player.NGames, player.Average()));
+            Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", player.Name, player.Data, player.Average()));
         }
     }
 }
