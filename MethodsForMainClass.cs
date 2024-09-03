@@ -100,11 +100,12 @@ public static class Game
     public static void DisplayGameResult()
     {
         ShowTopList();
-        Console.WriteLine($"Correct, it took {numberOfGuesses} guesses\nContinue?");
+        Console.WriteLine($"Correct, it took {numberOfGuesses} guesses.");
     }
 
     public static void AskToContinue()
     {
+        Console.WriteLine("\nContinue?");
         string answer = ReadConsole("Input is invalid!");
         if (answer != null && answer != "" && answer[..1] == "n")
         {
@@ -112,7 +113,7 @@ public static class Game
         }
     }
 
-    static List<PlayerData> GetGameResults()
+    static void GetGameResults()
     {
         StreamReader savedResults = new("result.txt");
         string? resultLine;
@@ -134,14 +135,14 @@ public static class Game
             }
         }
         savedResults.Close();
-        gameResultsList.Sort((playerOnPosition1, playerOnPosition2) => playerOnPosition1.Average().CompareTo(playerOnPosition2.Average()));
-        return gameResultsList;
+        gameResultsList.Sort((playerOnPosition1, playerOnPosition2) =>
+        playerOnPosition1.Average().CompareTo(playerOnPosition2.Average()));
     }
 
     static void ShowTopList()
     {
         GetGameResults();
-        Console.WriteLine("Player games average");
+        Console.WriteLine(string.Format("{0,-9}{1,8}{2,9}", "Player", "games", "average"));
         foreach (PlayerData player in gameResultsList)
         {
             Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", player.Name, player.NGames, player.Average()));
