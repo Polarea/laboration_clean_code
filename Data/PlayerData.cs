@@ -1,33 +1,33 @@
 public class PlayerData : IData
 {
     public string Name { get; private set; }
-    public int Data { get; private set; }
+    public int Score { get; private set; }
     int totalGuess;
 
 
     public PlayerData(string name, int guesses)
     {
         Name = name;
-        Data = 1;
+        Score = 1;
         totalGuess = guesses;
     }
 
     public void Update(int guesses)
     {
         totalGuess += guesses;
-        Data++;
+        Score++;
     }
 
     public double Average()
     {
-        return (double)totalGuess / Data;
+        return (double)totalGuess / Score;
     }
 
 
     public override bool Equals(Object? otherObject)
     {
-        if (otherObject is PlayerData playerData)
-            return Name.Equals(playerData.Name);
+        if (otherObject is PlayerData playerScore)
+            return Name.Equals(playerScore.Name);
         else return false;
     }
 

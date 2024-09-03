@@ -1,4 +1,46 @@
 public class ConsoleDisplay : IDisplay
 {
+    public bool AskToContinue()
+    {
+        Console.WriteLine("\nContinue?");
+        string? answer = Console.ReadLine();
+        if (answer != null && answer != "" && answer[..1] == "n")
+            return false;
+        else return true;
+    }
 
+    public void DisplayGameResult(int gameScore)
+    {
+        Console.WriteLine($"Correct, it took {gameScore} guesses.");
+    }
+
+    public void DisplayNewGame(string newGame)
+    {
+        Console.WriteLine($"For practice, number is: {newGame}\n");
+    }
+
+    public void DisplayNewGameMessage()
+    {
+        Console.WriteLine("New game:\n");
+    }
+
+    public string GetUserName()
+    {
+        string? name = null;
+        while (name == null)
+        {
+            Console.WriteLine("Enter your user name:\n");
+            name = Console.ReadLine();
+        }
+        return name;
+    }
+
+    public void DisplayTopList(List<IData> topList)
+    {
+        Console.WriteLine(string.Format("{0,-9}{1,8}{2,9}", "Player", "games", "average"));
+        foreach (IData data in topList)
+        {
+            Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", data.Name, data.Score, data.Average()));
+        }
+    }
 }
