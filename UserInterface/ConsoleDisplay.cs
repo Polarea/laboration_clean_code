@@ -11,7 +11,7 @@ public class ConsoleDisplay : IDisplay
 
     public void DisplayGameResult(int gameScore)
     {
-        Console.WriteLine($"Correct, it took {gameScore} guesses.");
+        Console.WriteLine($"Correct, it took {gameScore} guesses.\n");
     }
 
     public void DisplayNewGame(string newGame)
@@ -35,10 +35,16 @@ public class ConsoleDisplay : IDisplay
         return name;
     }
 
-    public void DisplayTopList(List<IData> topList)
+    public string GetUserGuess()
+    {
+        string? userGuess = Console.ReadLine();
+        return userGuess ?? "";
+    }
+
+    public void DisplayTopList(List<IGameData> topList)
     {
         Console.WriteLine(string.Format("{0,-9}{1,8}{2,9}", "Player", "games", "average"));
-        foreach (IData data in topList)
+        foreach (IGameData data in topList)
         {
             Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", data.Name, data.Score, data.Average()));
         }
