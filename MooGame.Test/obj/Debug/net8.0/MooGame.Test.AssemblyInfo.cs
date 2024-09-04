@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MooGame.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+291761be5216317c67734b40520b4a9c63085f1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d7099576dfdde7e4deb69558cde667a2ac94b76")]
 [assembly: System.Reflection.AssemblyProductAttribute("MooGame.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MooGame.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

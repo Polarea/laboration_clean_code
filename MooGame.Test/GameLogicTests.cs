@@ -1,32 +1,36 @@
-using Newtonsoft.Json.Bson;
-
 namespace MooGame.Test;
 
 [TestClass]
 public class GameLogicTests
 {
-    static GameLogic _gameLogic = new();
-    string goal = _gameLogic.MakeGoal();
+    GameLogic? _gameLogic;
+    string? goal;
+    [TestInitialize]
+    public void TestInitialize()
+    {
+        _gameLogic = new();
+        goal = _gameLogic.MakeGoal();
+    }
 
     [TestMethod]
     public void GoalShouldBeFourDigitLong()
     {
         var expectedLength = 4;
-        Assert.AreEqual(expectedLength, goal.Length);
+        Assert.AreEqual(expectedLength, goal?.Length);
     }
 
     [TestMethod]
     public void GoalShouldBeAString()
     {
         var expectedType = "String";
-        Assert.AreEqual(expectedType, goal.GetType().Name);
+        Assert.AreEqual(expectedType, goal?.GetType().Name);
     }
 
     [TestMethod]
     public void GoalShouldHaveUniqueDigits()
     {
         var expectedLength = 4;
-        Assert.AreEqual(expectedLength, goal.Distinct().Count());
+        Assert.AreEqual(expectedLength, goal?.Distinct().Count());
     }
 
     [TestMethod]
@@ -40,7 +44,16 @@ public class GameLogicTests
     [DataRow("7890", "7890", "BBBB,")]
     public void CheckResultShouldBeCorrect(string goal, string guess, string checkResult)
     {
-        string correctResult = _gameLogic.CheckUserGuess(goal, guess);
+        string? correctResult = _gameLogic?.CheckUserGuess(goal, guess);
         Assert.AreEqual(checkResult, correctResult);
+    }
+
+    [TestMethod]
+    public void MakeTopList_ShouldSortListAccordingToLeastNumberOfGuesses()
+    {
+        MockPlayerDataList mock = new();
+        var unsortedList = mock.playerDataUnsortedList;
+        var sortedList = _gameLogic?.MakeTopList(unsortedList);
+        Assert.AreEqual(sortedList, unsortedList);
     }
 }
