@@ -20,7 +20,7 @@ public class GameController
             string goal = _gameLogic.MakeGoal();
             _display.DisplayNewGameMessage();
             _display.DisplayNewGame(goal);
-            numberOfGuesses = PlayGameUntillRightGuess(numberOfGuesses);
+            numberOfGuesses = PlayGameUntillRightGuess(goal, numberOfGuesses);
             _dataHandler.SaveScore(name, numberOfGuesses);
             var scoreList = _dataHandler.GetScore();
             _display.DisplayGameResult(numberOfGuesses);
@@ -31,14 +31,14 @@ public class GameController
         }
     }
 
-    int PlayGameUntillRightGuess(int numberOfGuesses)
+    int PlayGameUntillRightGuess(string goal, int numberOfGuesses)
     {
         string resultOfUserGuess;
         do
         {
             numberOfGuesses++;
             string userGuess = _display.GetUserGuess();
-            resultOfUserGuess = _gameLogic.CheckUserGuess(userGuess);
+            resultOfUserGuess = _gameLogic.CheckUserGuess(goal, userGuess);
             Console.WriteLine(resultOfUserGuess + "\n");
         }
         while (resultOfUserGuess != "BBBB,");

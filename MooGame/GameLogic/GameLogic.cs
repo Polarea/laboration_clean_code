@@ -2,7 +2,6 @@ using System.Reflection.Metadata.Ecma335;
 
 public class GameLogic : IGameLogic
 {
-    string goal = string.Empty;
     string resultOfUserGuess = string.Empty;
     public string MakeGoal()
     {
@@ -17,11 +16,10 @@ public class GameLogic : IGameLogic
             }
             fourUniqueDigits += $"{uniqueDigit}";
         }
-        goal = fourUniqueDigits;
-        return goal;
+        return fourUniqueDigits;
     }
 
-    public string CheckUserGuess(string userGuess = "")
+    public string CheckUserGuess(string goal, string userGuess = "")
     {
         int cows = 0, bulls = 0;
         userGuess = userGuess.PadRight(4);

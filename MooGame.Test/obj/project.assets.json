@@ -389,6 +389,16 @@
             "related": ".xml"
           }
         }
+      },
+      "laboration_clean_code/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/laboration_clean_code.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/laboration_clean_code.dll": {}
+        }
       }
     }
   },
@@ -986,6 +996,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "laboration_clean_code/1.0.0": {
+      "type": "project",
+      "path": "../MooGame/laboration_clean_code.csproj",
+      "msbuildProject": "../MooGame/laboration_clean_code.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -993,7 +1008,8 @@
       "MSTest.TestAdapter >= 3.1.1",
       "MSTest.TestFramework >= 3.1.1",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
-      "coverlet.collector >= 6.0.0"
+      "coverlet.collector >= 6.0.0",
+      "laboration_clean_code >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1023,7 +1039,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\rizwa\\Downloads\\Laboration_Clean_Code\\MooGame\\laboration_clean_code.csproj": {
+              "projectPath": "C:\\Users\\rizwa\\Downloads\\Laboration_Clean_Code\\MooGame\\laboration_clean_code.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

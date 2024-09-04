@@ -109,3 +109,10 @@ C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\obj\Debug\net8.0\ref
 C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\obj\Debug\net8.0\MooGame.Test.pdb
 C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\obj\Debug\net8.0\MooGame.Test.genruntimeconfig.cache
 C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\obj\Debug\net8.0\ref\MooGame.Test.dll
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\obj\Debug\net8.0\MooGame.Test.sourcelink.json
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\bin\Debug\net8.0\CoverletSourceRootsMapping_MooGame.Test
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\bin\Debug\net8.0\laboration_clean_code.deps.json
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\bin\Debug\net8.0\laboration_clean_code.runtimeconfig.json
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\bin\Debug\net8.0\laboration_clean_code.exe
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\bin\Debug\net8.0\laboration_clean_code.dll
+C:\Users\rizwa\Downloads\Laboration_Clean_Code\MooGame.Test\bin\Debug\net8.0\laboration_clean_code.pdb
