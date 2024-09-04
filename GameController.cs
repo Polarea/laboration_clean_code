@@ -1,9 +1,9 @@
 public class GameController
 {
-    IGameDataHandler _dataHandler;
+    IPlayerDataHandler _dataHandler;
     IDisplay _display;
     IGameLogic _gameLogic;
-    public GameController(IGameDataHandler dataHandler, IDisplay display, IGameLogic gameLogic)
+    public GameController(IPlayerDataHandler dataHandler, IDisplay display, IGameLogic gameLogic)
     {
         _dataHandler = dataHandler;
         _display = display;
@@ -24,6 +24,7 @@ public class GameController
             _dataHandler.SaveScore(name, numberOfGuesses);
             var scoreList = _dataHandler.GetScore();
             _display.DisplayGameResult(numberOfGuesses);
+            _gameLogic.MakeTopList(scoreList);
             _display.DisplayTopList(scoreList);
             gameIsOn = _display.AskToContinue();
             numberOfGuesses = 0;

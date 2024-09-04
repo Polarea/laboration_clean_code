@@ -41,12 +41,12 @@ public class ConsoleDisplay : IDisplay
         return userGuess ?? "";
     }
 
-    public void DisplayTopList(List<IGameData> topList)
+    public void DisplayTopList(List<PlayerData> topList)
     {
         Console.WriteLine(string.Format("{0,-9}{1,8}{2,9}", "Player", "games", "average"));
-        foreach (IGameData data in topList)
+        foreach (PlayerData data in topList)
         {
-            Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", data.Name, data.Score, data.Average()));
+            Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", data.Name, data.NumberOfGames, data.Average()));
         }
     }
 }

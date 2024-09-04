@@ -1,9 +1,9 @@
-public class GameDataInFile : IGameDataHandler
+public class PlayerDataFile : IPlayerDataHandler
 {
-    public List<IGameData> GetScore()
+    public List<PlayerData> GetScore()
     {
         StreamReader savedResults = new("result.txt");
-        List<IGameData> _listData = [];
+        List<PlayerData> _playerDataList = [];
         string? resultLine;
         while ((resultLine = savedResults.ReadLine()) != null)
         {
@@ -12,18 +12,18 @@ public class GameDataInFile : IGameDataHandler
             string name = nameAndGuesses[0];
             int guesses = Convert.ToInt32(nameAndGuesses[1]);
             PlayerData playerData = new(name, guesses);
-            int playerPositionInResultList = _listData.IndexOf(playerData);
-            if (playerPositionInResultList < 0)
+            var playerInList = _playerDataList.Find(playerInList => playerInList.Equals(playerData));
+            if (playerInList != null)
             {
-                _listData.Add(playerData);
+                playerInList.Update(guesses);
             }
             else
             {
-                _listData[playerPositionInResultList].Update(guesses);
+                _playerDataList.Add(playerData);
             }
         }
         savedResults.Close();
-        return _listData;
+        return _playerDataList;
     }
 
     public void SaveScore(string name, int score)

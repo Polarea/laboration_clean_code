@@ -46,7 +46,7 @@ public class GameLogic : IGameLogic
         return resultOfUserGuess;
     }
 
-    public List<IGameData> MakeTopList(List<IGameData> scoreList)
+    public List<PlayerData> MakeTopList(List<PlayerData> scoreList)
     {
         scoreList.Sort((playerOnPosition1, playerOnPosition2) =>
         playerOnPosition1.Average().CompareTo(playerOnPosition2.Average()));

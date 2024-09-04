@@ -1,33 +1,33 @@
-public class PlayerData : IGameData
+public class PlayerData
 {
     public string Name { get; private set; } = "";
-    public int Score { get; private set; }
-    int totalGuess;
+    public int NumberOfGames { get; private set; }
+    int totalGuesses;
 
 
     public PlayerData(string name, int guesses)
     {
         Name = name;
-        Score = 1;
-        totalGuess = guesses;
+        NumberOfGames = 1;
+        totalGuesses = guesses;
     }
 
     public void Update(int guesses)
     {
-        totalGuess += guesses;
-        Score++;
+        totalGuesses += guesses;
+        NumberOfGames++;
     }
 
     public double Average()
     {
-        return (double)totalGuess / Score;
+        return (double)totalGuesses / NumberOfGames;
     }
 
 
     public override bool Equals(Object? otherObject)
     {
-        if (otherObject is PlayerData playerScore)
-            return Name.Equals(playerScore.Name);
+        if (otherObject is PlayerData playerData)
+            return Name.Equals(playerData.Name);
         else return false;
     }
 

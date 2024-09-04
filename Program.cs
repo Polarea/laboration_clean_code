@@ -4,7 +4,7 @@
 	public static void Main(string[] args)
 	{
 		GameController gameController = new(
-			new GameDataInFile(),
+			new PlayerDataFile(),
 			new ConsoleDisplay(),
 			new GameLogic()
 		);
